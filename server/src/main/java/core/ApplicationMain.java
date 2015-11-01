@@ -1,6 +1,7 @@
 package core;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -21,12 +22,13 @@ public class ApplicationMain extends Application {
   @Override
   public Set<Class<?>> getClasses() {
     final Set<Class<?>> classes = new HashSet<>();
-    classes.add(HelloWorldController.class);
     classes.add(JsonHelloWorld.class);
-    classes.add(BroadcastController.class);
     classes.add(ChatService.class);
+    classes.add(LandingPageController.class);
     //This class gives us JSON bindings by Jackson
     classes.add(JacksonJsonProvider.class);
+    //Enable JSP support
+    classes.add(JspMvcFeature.class);
     return classes;
   }
 

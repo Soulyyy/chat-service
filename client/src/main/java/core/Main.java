@@ -54,18 +54,11 @@ public class Main {
           break;
         }
         target.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(new Message(null, name, s), MediaType.APPLICATION_JSON_TYPE), Message.class);
-        //System.out.println(response);
-
       }
-    } catch (
-        ProcessingException e
-        )
-
-    {
+    } catch (ProcessingException e) {
       logger.error("Connection closed by server, exiting.");
       System.exit(1);
     }
-
     source.close();
     scanner.close();
   }

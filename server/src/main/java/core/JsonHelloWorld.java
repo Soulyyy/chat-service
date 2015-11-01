@@ -26,6 +26,6 @@ public class JsonHelloWorld {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/test")
   public String test() {
-    return "Hello JSON!";
+    return "Hello Not so JSON!";
   }
 }

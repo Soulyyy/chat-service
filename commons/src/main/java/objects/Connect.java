@@ -21,6 +21,6 @@ public class Connect {
   private String name;
 
   public String toString() {
-    return "["+timestamp+"] "+name +" connected to the server!";
+    return "[" + timestamp + "] " + name + " connected to the server!";
   }
 }
