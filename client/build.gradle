@@ -11,7 +11,7 @@ dependencies {
 }
 
 fatJar.manifest {
-    attributes 'Main-Class': 'core/Main'
+    attributes 'Main-Class': 'core.Main'
 }
 
 build.dependsOn(fatJar)

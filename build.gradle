@@ -39,4 +39,5 @@ subprojects {
     }
 }
 
+task stage(dependsOn: ['package'])
 
