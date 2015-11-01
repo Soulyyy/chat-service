@@ -12,7 +12,6 @@ import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.time.Instant;
-import java.util.List;
 
 @Singleton
 @Path("/chat")
@@ -29,7 +28,7 @@ public class ChatService {
     Message broadcastMessage = new Message(Instant.now().toString(), message.getUserName(), message.getMessage());
     OutboundEvent event = builder.name("message").mediaType(MediaType.APPLICATION_JSON_TYPE).data(Message.class, broadcastMessage).build();
     broadcaster.broadcast(event);
-    cache.addElement(message);
+    cache.addElement(broadcastMessage);
     return broadcastMessage;
   }
 
@@ -44,12 +43,12 @@ public class ChatService {
   @POST
   @Path("/register")
   @Consumes(MediaType.APPLICATION_JSON)
-  public List<Message> registerUser(Connect connect) {
+  public Message[] registerUser(Connect connect) {
     OutboundEvent.Builder builder = new OutboundEvent.Builder();
     connect.setTimestamp(Instant.now().toString());
     OutboundEvent event = builder.name("connect").mediaType(MediaType.APPLICATION_JSON_TYPE).data(Connect.class, connect).build();
     broadcaster.broadcast(event);
-    return cache.getLIST();
+    return cache.getAsArray();
   }
 
 
