@@ -1,0 +1,38 @@
+allprojects {
+    group 'zeroturnaround'
+    version '1.0'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    task fatJar(type: Jar) {
+        baseName = project.name + '-all'
+        from {
+            configurations.compile.collect {
+                it.isDirectory() ? it : zipTree(it)
+            }
+        }
+        with jar
+    }
+
+    configurations {
+        provided
+    }
+
+    dependencies {
+        compile 'org.slf4j:slf4j-api:1.7.12'
+        compile 'org.slf4j:slf4j-simple:1.7.12'
+        compile "org.projectlombok:lombok:1.16.6"
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+    }
+}
+
+
