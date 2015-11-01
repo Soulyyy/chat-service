@@ -1,4 +1,6 @@
-
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
 allprojects {
     group 'zeroturnaround'
     version '1.0'
@@ -7,9 +9,6 @@ allprojects {
         mavenCentral()
     }
 
-    task wrapper(type: Wrapper) {
-        gradleVersion = '1.6'
-    }
 }
 
 subprojects {
