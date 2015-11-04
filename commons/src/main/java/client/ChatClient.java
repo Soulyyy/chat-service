@@ -14,6 +14,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -26,33 +28,44 @@ public class ChatClient {
 
   private final String ip;
 
+  private final InputStream inputStream;
+  private final PrintStream printStream;
+
+  public ChatClient(String[] args, InputStream inputStream, PrintStream printStream) {
+    this.ip = args.length == 0 ? "http://localhost:8080" : args[0];
+    logger.info("Connecting on address : {}", ip);
+    this.inputStream = inputStream;
+    this.printStream = printStream;
+  }
+
 
   public void start() {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(this.inputStream);
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target(ip).path("chat");
     EventSource source = EventSource.target(target).build();
     try {
-      EventListener connectListener = inboundEvent -> System.out.println(inboundEvent.readData(Connect.class).toString());
-      EventListener listener = inboundEvent -> System.out.println(inboundEvent.readData(Message.class).toString());
+
+      EventListener connectListener = inboundEvent -> printStream.println(inboundEvent.readData(Connect.class).toString());
+      EventListener listener = inboundEvent -> printStream.println(inboundEvent.readData(Message.class).toString());
       source.register(listener, "message");
       source.register(connectListener, "connect");
-      System.out.println("Please enter your user name: ");
+      printStream.println("Please enter your user name: ");
       String name = scanner.nextLine();
       //Using array because of type erasure
       Message[] messages = target.path("register").request().accept(MediaType.APPLICATION_JSON_TYPE)
           .post(Entity.entity(new Connect(null, name), MediaType.APPLICATION_JSON_TYPE), Message[].class);
       for (Object message : messages) {
         logger.debug("Message is : {}", message);
-        System.out.println(message.toString());
+        printStream.println(message.toString());
       }
       if (messages.length > 0) {
-        System.out.println("------END OF HISTORY------------");
+        printStream.println("------END OF HISTORY------------");
       }
-      System.out.println("Thanks, you are now called: " + name);
+      printStream.println("Thanks, you are now called: " + name);
       source.open();
       while (true) {
-        System.out.println("Enter message: ");
+        printStream.println("Enter message: ");
         String s = scanner.nextLine();
         if ("exit chat".equals(s)) {
           break;

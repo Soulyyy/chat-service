@@ -13,9 +13,7 @@ public class Main {
   static final Logger logger = LoggerFactory.getLogger(Main.class);
 
   public static void main(String[] args) {
-    String ip = args.length == 0 ? "http://localhost:8080" : args[0];
-    logger.info("Connecting on address : {}", ip);
-    ChatClient chatClient = new ChatClient(ip);
+    ChatClient chatClient = new ChatClient(args, System.in, System.out);
     chatClient.start();
   }
 }

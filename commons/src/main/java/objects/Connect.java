@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * Created by Hans on 01/11/2015.
  */
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Connect {
+public class Connect implements Serializable {
 
   @Getter
   @Setter
