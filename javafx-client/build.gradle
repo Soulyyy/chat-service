@@ -1,5 +1,5 @@
 dependencies {
-    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.1'
+
     compile "javax.ws.rs:jsr311-api:1.1.1"
 
     compile 'org.glassfish.jersey.core:jersey-client:2.22.1'
@@ -9,3 +9,9 @@ dependencies {
 
     compile project(':commons')
 }
+
+fatJar.manifest {
+    attributes 'Main-Class': 'core.Main'
+}
+
+build.dependsOn(fatJar)

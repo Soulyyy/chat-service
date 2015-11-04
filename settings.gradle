@@ -3,4 +3,5 @@ include 'server'
 include 'backend'
 include 'commons'
 include 'client'
+include 'javafx-client'
 
