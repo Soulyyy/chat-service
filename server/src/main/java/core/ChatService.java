@@ -1,5 +1,6 @@
 package core;
 
+import chat.User;
 import chat.UserRegistration;
 import objects.Connect;
 import objects.Message;
@@ -55,6 +56,18 @@ public class ChatService {
     userRegistration.registerUser(connect.getName());
     broadcaster.broadcast(event);
     return cache.getAsArray();
+  }
+
+  @GET
+  @Path("/online")
+  @Produces(MediaType.TEXT_PLAIN)
+  public String getOnlineUsers() {
+    String resp = "";
+    for(User user : userRegistration.getUsersAsList()) {
+      resp += user.toString()+"\n";
+    }
+    System.out.println(resp);
+    return resp;
   }
 
 }

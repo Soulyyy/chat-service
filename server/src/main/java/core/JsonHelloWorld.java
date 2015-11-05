@@ -14,8 +14,7 @@ import javax.ws.rs.core.MediaType;
 public class JsonHelloWorld {
 
   @GET
-  @Produces("application/json")
-  //@Produces(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   public Message getMessage() {
     Message message = new Message();
     message.setMessage("Hello JSON");

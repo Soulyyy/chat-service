@@ -11,4 +11,10 @@ public class User {
 
   private final String userName;
 
+  @Override
+  public String toString() {
+    return userName;
+  }
+
+
 }

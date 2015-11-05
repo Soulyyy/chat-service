@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * Created by Hans on 01/11/2015.
+ * JSON object to handle connection request
  */
 @RequiredArgsConstructor
 @AllArgsConstructor

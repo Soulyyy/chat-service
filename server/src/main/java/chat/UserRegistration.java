@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 public class UserRegistration {
 
-  //Unsure which implementation of set lombok would take
   private final Set<User> userSet = new HashSet<>();
 
   private final AtomicInteger userCount = new AtomicInteger(0);

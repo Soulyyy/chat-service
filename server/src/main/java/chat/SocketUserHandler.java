@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Hans on 05/11/2015.
+ * Merge with userreg
  */
 @RequiredArgsConstructor
 public class SocketUserHandler {

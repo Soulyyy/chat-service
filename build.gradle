@@ -2,7 +2,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
 allprojects {
-    group 'zeroturnaround'
+    group 'chat'
     version '1.0'
 
     repositories {

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by Hans on 31/10/2015.
+ * Command line application Main class
  */
 public class Main {
 

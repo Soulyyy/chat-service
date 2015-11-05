@@ -1,6 +1,3 @@
-//Research only at this point
-
-/*
 package core;
 
 import javax.websocket.*;
@@ -8,11 +5,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-*/
 /**
  * Created by Hans on 05/11/2015.
- *//*
-
+ */
 @ClientEndpoint
 public class SocketHandler implements Runnable {
 
@@ -43,7 +38,6 @@ public class SocketHandler implements Runnable {
 
   @Override
   public void run() {
-    Server server = new Server()
+
   }
 }
-*/

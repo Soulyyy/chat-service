@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+/**
+ * JSON object to handle messaging
+ */
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message implements Serializable {
