@@ -7,7 +7,7 @@ import org.glassfish.jersey.media.sse.EventListener;
 import java.io.OutputStream;
 
 /**
- * Class to mask listening websocket.
+ * Class to mask listening SSE.
  * Takes an outputStream to publish data to.
  */
 @RequiredArgsConstructor
