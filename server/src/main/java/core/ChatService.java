@@ -1,5 +1,6 @@
 package core;
 
+import chat.UserRegistration;
 import objects.Connect;
 import objects.Message;
 import org.glassfish.jersey.media.sse.EventOutput;
@@ -17,13 +18,14 @@ import java.time.Instant;
 @Path("/chat")
 public class ChatService {
 
+  private UserRegistration userRegistration = new UserRegistration();
   Cache cache = new Cache(100);
   private SseBroadcaster broadcaster = new SseBroadcaster();
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  public Message broadCast(Message message) {
+  public Message broadcast(Message message) {
     OutboundEvent.Builder builder = new OutboundEvent.Builder();
     Message broadcastMessage = new Message(Instant.now().toString(), message.getUserName(), message.getMessage());
     OutboundEvent event = builder.name("message").mediaType(MediaType.APPLICATION_JSON_TYPE).data(Message.class, broadcastMessage).build();
@@ -36,6 +38,8 @@ public class ChatService {
   @Produces(SseFeature.SERVER_SENT_EVENTS)
   public EventOutput chatListener() {
     final EventOutput eventOutput = new EventOutput();
+    //eventOutput.
+    broadcaster.onClose(eventOutput);
     this.broadcaster.add(eventOutput);
     return eventOutput;
   }
@@ -46,7 +50,9 @@ public class ChatService {
   public Message[] registerUser(Connect connect) {
     OutboundEvent.Builder builder = new OutboundEvent.Builder();
     connect.setTimestamp(Instant.now().toString());
+    connect.setConnect(true);
     OutboundEvent event = builder.name("connect").mediaType(MediaType.APPLICATION_JSON_TYPE).data(Connect.class, connect).build();
+    userRegistration.registerUser(connect.getName());
     broadcaster.broadcast(event);
     return cache.getAsArray();
   }

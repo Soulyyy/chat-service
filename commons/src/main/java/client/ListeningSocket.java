@@ -16,7 +16,7 @@ public class ListeningSocket {
   /**
    * @param Only parameter of the class. This should not be changed.
    */
-  final OutputStream outputStream;
+  private final OutputStream outputStream;
 
   public void connectSocket(String ip) {
 

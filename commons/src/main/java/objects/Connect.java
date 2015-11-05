@@ -22,7 +22,17 @@ public class Connect implements Serializable {
   @Setter
   private String name;
 
+  @Getter
+  @Setter
+  private boolean isConnect;
+
   public String toString() {
-    return "[" + timestamp + "] " + name + " connected to the server!";
+    String resp = "[" + timestamp + "] " + name;
+
+    if (isConnect) {
+      return resp + " connected to the server!";
+    } else {
+      return resp + " disconnected from the server!";
+    }
   }
 }

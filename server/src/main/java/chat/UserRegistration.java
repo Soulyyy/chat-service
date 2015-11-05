@@ -2,7 +2,10 @@ package chat;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -11,12 +14,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 public class UserRegistration {
 
-  private final List<User> userList;
+  //Unsure which implementation of set lombok would take
+  private final Set<User> userSet = new HashSet<>();
 
-  private final AtomicInteger userCount;
+  private final AtomicInteger userCount = new AtomicInteger(0);
 
   public void registerUser(String name) {
-    userList.add(new User(userCount.getAndIncrement(), name));
+    userSet.add(new User(userCount.getAndIncrement(), name));
+  }
+
+  public void userDisconnect(User user) {
+    userSet.remove(user);
+  }
+
+  public List<User> getUsersAsList() {
+    return new ArrayList<>(userSet);
   }
 
 }

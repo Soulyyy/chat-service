@@ -22,7 +22,7 @@ import java.util.Scanner;
  * Class to handle all client communication
  */
 @RequiredArgsConstructor
-public class ChatClient {
+public class ChatClient implements Runnable {
 
   static final Logger logger = LoggerFactory.getLogger(ChatClient.class);
 
@@ -38,8 +38,8 @@ public class ChatClient {
     this.printStream = printStream;
   }
 
-
-  public void start() {
+  @Override
+  public void run() {
     Scanner scanner = new Scanner(this.inputStream);
     Client client = ClientBuilder.newClient();
     WebTarget target = client.target(ip).path("chat");
@@ -54,7 +54,7 @@ public class ChatClient {
       String name = scanner.nextLine();
       //Using array because of type erasure
       Message[] messages = target.path("register").request().accept(MediaType.APPLICATION_JSON_TYPE)
-          .post(Entity.entity(new Connect(null, name), MediaType.APPLICATION_JSON_TYPE), Message[].class);
+          .post(Entity.entity(new Connect(null, name, true), MediaType.APPLICATION_JSON_TYPE), Message[].class);
       for (Object message : messages) {
         logger.debug("Message is : {}", message);
         printStream.println(message.toString());

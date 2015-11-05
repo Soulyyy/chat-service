@@ -14,6 +14,6 @@ public class Main {
 
   public static void main(String[] args) {
     ChatClient chatClient = new ChatClient(args, System.in, System.out);
-    chatClient.start();
+    new Thread(chatClient).start();
   }
 }
