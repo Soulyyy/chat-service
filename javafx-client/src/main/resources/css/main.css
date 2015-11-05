@@ -1,3 +1,6 @@
-.text-area .content {
-    -fx-background-color: black;
+#text .content {
+    -fx-background-color: azure;
+}
+#participants .content {
+    -fx-background-color: aliceblue;
 }

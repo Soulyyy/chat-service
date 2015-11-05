@@ -23,7 +23,10 @@ public class FxClient extends Application {
     scene.getStylesheets().add(getClass().getResource("css/main.css").toString());
     primaryStage.setTitle("Chat Client");
     primaryStage.setScene(scene);
+    primaryStage.setMaxHeight(600);
+    primaryStage.setMaxWidth(600);
     primaryStage.show();
+
   }
 
 }
